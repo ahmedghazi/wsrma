@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var forms = require('forms');
-var Vote = require('./vote');
 
 var User = mongoose.Schema({
     email: {
