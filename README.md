@@ -1,3 +1,3 @@
 Express Rapido
 =========
-bootstrap to start node js and Express framwork 
+Hello world app with Node js + Express + Mongooze + Jade
