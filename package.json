@@ -1,23 +1,19 @@
 {
-  "name": "Velux",
+  "name": "Express Rapido",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "startProd": "forever start ./bin/www",
-    "fetchInstagram1": "curl  -k --data 'tag=chambredereve' http://54.76.123.88/instagram/subscribe",
-    "subscribeInstagramHash1": "node ./bin/subscribe --hashtag chambredereve --callbackUlr http://54.76.123.88",
-    "unsubscribeInstagram": "node ./bin/subscribe --unsubscribe"
+    "startProd": "forever start ./bin/www"
   },
   "config": {
     "host": "http://localhost",
     "port": 3001,
     "session": {
-      "db_name": "velux_cdr_sessions",
-      "secret_key": "velux_cdr_secrezadaevztName_2014"
+      "db_name": "sessions",
+      "secret_key": "secretRadpido2014"
     },
-    "app_db_name": "velux_cdr",
-    "instagram_security": "veluxSecurityToken6543adzfe43"
+    "app_db_name": "application"
   },
   "dependencies": {
     "express": "~4.0.0",
