@@ -1,0 +1,22 @@
+extends layout
+
+prepend content
+    div.wrap.index
+        div.container
+            div.head
+                p!= __('homeHeaderText')
+            div.call_to_action.animated.bounceInDown
+                p!= __('callToAction')
+                a.about.animated.bounceInDown(href="/about")= __('HomeAboutLink') 
+            div.band
+                div.pola.animated.animated.bounceInLeft
+                div.content.animated.animated.bounceInRight
+                    p= __('howTo1')
+                    div.label.hashtag= __('eventHashTag')
+            div.city_container
+                div.cityback.animated.fadeInUp
+                div.actions.animated.tada
+                    a.btnr.register(href="/account/register")= __('btnPlay')
+                    a.btnr.seeandvote(href="/gallery")
+                        p= __('btnSeeAndVote_one')
+                        p= __('btnSeeAndVote_two')
