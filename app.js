@@ -99,7 +99,7 @@ var AppBoot = function() {
         bootLog('Setup i18n : %s', 'Ok');
         i18n.configure({
             defaultLocale: 'fr',
-            locales: ['en', 'fr'],
+            locales: ['fr'],
             directory: __dirname + '/locales',
             updateFiles: false
         });
