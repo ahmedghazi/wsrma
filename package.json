@@ -13,11 +13,11 @@
     "host": "http://localhost",
     "port": 3001,
     "session": {
-      "db_name": "wearefree_sessions",
-      "secret_key": "wearefree_secret_name_2014"
+      "db_name": "velux_cdr_sessions",
+      "secret_key": "velux_cdr_secrezadaevztName_2014"
     },
-    "app_db_name": "wearefree",
-    "instagram_security": "wafSecurityToken6543565432876543"
+    "app_db_name": "velux_cdr",
+    "instagram_security": "veluxSecurityToken6543adzfe43"
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -35,7 +35,7 @@
     "connect-flash": "~0.1.1",
     "colors": "~0.6.2",
     "forms-mongoose": "0.0.6",
-    "forms": "~0.4.0",
+    "forms": "~0.7.0",
     "i18n": "~0.4.1",
     "instagram-node-lib": "~0.1.1",
     "minimist": "0.0.8",

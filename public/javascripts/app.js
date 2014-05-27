@@ -1,21 +1,17 @@
 'use strict';
 
-angular.module('waf', [
+/*angular.module('app', [
     'ngRoute',
-    'waf.filters',
-    'waf.services',
-    'waf.directives',
-    'waf.controllers',
+    'app.filters',
+    'app.services',
+    'app.directives',
+    'app.controllers',
     'angularFileUpload'
 ]).config(['$routeProvider', function($routeProvider) {
-
-        //$routeProvider.when('/account/register', {controller: 'UserCtrl'});
-        //$routeProvider.otherwise({redirectTo: '/'});
     }
 ]);
 
-/* Controllers */
-var appControllers = angular.module('waf.controllers', []);
+var appControllers = angular.module('app.controllers', []);
 
 appControllers.controller('UserCtrl', [
     '$scope',
@@ -43,7 +39,6 @@ appControllers.controller('UserCtrl', [
         $scope.uploadAndSave = function() {
             $scope.errors = [];
 
-            /* HAck */
             if (!$scope.image) {
                 if ($('body').hasClass('fr')) {
                     $scope.errors.push('* L\'image est obligatoire');
@@ -94,8 +89,7 @@ appControllers.controller('PlayerCtrl', [
 ]);
 
 
-/* Directives */
-var appDirectives = angular.module('waf.directives', []);
+var appDirectives = angular.module('app.directives', []);
 
 
 appDirectives.directive('imgdynloader', [
@@ -139,9 +133,9 @@ appDirectives.directive('fbinvite', [
                 e.preventDefault();
                 var url = attrs.href;
                 var hostUrl = location.protocol + '//' + location.host + url;
-                /*FB.api('?id=' + hostUrl, {}, function(response) {
-                 console.log(response);
-                 });*/
+                //FB.api('?id=' + hostUrl, {}, function(response) {
+                // console.log(response);
+                // });
                 FB.ui({
                     method: 'apprequests',
                     //object_id: hostUrl,
@@ -265,9 +259,9 @@ appDirectives.directive('fbconnectFull', [
                             $scope.$apply();
                         });
                         //fetch if user like the page or not
-                        /*FB.api('/me/likes/371751712872681', function(response) {
-                         console.log('likes:', response);
-                         });*/
+                        //FB.api('/me/likes/371751712872681', function(response) {
+                        // console.log('likes:', response);
+                        // });
                     }
                 }, {scope: 'email,user_birthday,user_likes'});
             });
@@ -275,8 +269,7 @@ appDirectives.directive('fbconnectFull', [
     }
 ]);
 
-/* Filters */
-angular.module('waf.filters', []).filter('interpolate', ['version', function(version) {
+angular.module('app.filters', []).filter('interpolate', ['version', function(version) {
         return function(text) {
             return String(text).replace(/\%VERSION\%/mg, version);
         };
@@ -284,5 +277,4 @@ angular.module('waf.filters', []).filter('interpolate', ['version', function(ver
 ]);
 
 
-/* Services */
-angular.module('waf.services', []).value('version', '0.1');
+angular.module('app.services', []).value('version', '0.1');*/
