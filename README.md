@@ -30,6 +30,8 @@ OR
 node ./bin/www
 ```
 
+Then go to http://localhost:3001 to see your app in action
+
 Debuging
 --------------
 when you start app, you can define DEBUG level
@@ -67,7 +69,6 @@ Warnings
 This app use **mongoose (mongodb)** as storage engine. **Session storage** is configured to work with it.
 If you disable or do not use mongodb, do not forget to reconfigure your session storage (like InMemory storage).
 
-[git-repo-url]: git@github.com/Soixanteseize/express-rapido
 [node.js]:http://nodejs.org
 [jQuery]:http://jquery.com
 [Mongoose]:http://mongoosejs.com/
