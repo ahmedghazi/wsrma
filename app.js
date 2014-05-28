@@ -18,8 +18,14 @@ var AppBoot = function() {
         app.controllers = {};
         app.models = {};
         app.routesConfig = [];
+        app.mongoose = null;
         var i18n = require("i18n");
-
+        var favicon = require('static-favicon');
+        var logger = require('morgan');
+        var cookieParser = require('cookie-parser');
+        var bodyParser = require('body-parser');
+        var flash = require('connect-flash');
+        var limits = require('limits');
 
         app.registerController = function(key, controller)
         {
@@ -93,6 +99,16 @@ var AppBoot = function() {
         var host = process.env.npm_package_config_host || null;
         app.set('host', host);
 
+
+        app.use(favicon());
+        app.use(logger('dev'));
+        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded());
+        app.use(cookieParser());
+        app.use(flash());
+        app.use(limits('2Mo'));
+        app.enable('trust proxy');
+
         /**
          * Lang Support
          */
@@ -109,24 +125,16 @@ var AppBoot = function() {
     this.init = function()
     {
         bootLog('Init');
-        var favicon = require('static-favicon');
-        var logger = require('morgan');
-        var cookieParser = require('cookie-parser');
-        var bodyParser = require('body-parser');
-        var flash = require('connect-flash');
-        var limits = require('limits');
-        app.use(favicon());
-        app.use(logger('dev'));
-        app.use(bodyParser.json());
-        app.use(bodyParser.urlencoded());
-        app.use(cookieParser());
-        app.use(flash());
-        app.use(limits('2Mo'));
-        app.enable('trust proxy');
         app.initAppSettings();
         this.initDb();
-        this.initSession();
-        this.initSecurity();
+        var mongoose = require('mongoose');
+        var me = this;
+        mongoose.connection.on('open', function(){
+            app.mongoose = mongoose;
+            me.initSession();
+            me.initSecurity();
+            app.initRouteconfig();
+        });
         this.initViews();
         return this;
     };
@@ -138,31 +146,29 @@ var AppBoot = function() {
         var mongoose = require('mongoose');
         var mongoUrl = 'mongodb://localhost/' + app.get('appDbName');
         bootLog('Init Database connection to :', mongoUrl);
-        mongoose.connect(mongoUrl);
-        return this;
-    };
-    this.initViews = function()
-    {
-        bootLog('Init views');
-        var path = require('path');
-        app.use(express.static(path.join(__dirname, 'public')));
-        app.set('views', path.join(__dirname, 'views'));
-        app.set('view engine', 'jade');
+        mongoose.connect(mongoUrl, function(err) {
+            if (err) {
+                bootLog('Can\'t connect to %s database', mongoUrl);
+                return;
+            }
+        });
         return this;
     };
     this.initSession = function()
     {
         bootLog('Init Session');
         var session = require('./config/security/session')();
-        var MongoStore = require('connect-mongo')({
-            session: session
-        });
+        var MongoStore = require('connect-mongo')(session);
+        var store = null;
+        if (app.mongoose) {
+            store = new MongoStore({
+                db: app.mongoose.connection.db//app.get('sessionDbName')
+            });
+        }
         app.use(session({
             cookie: {maxAge: 60000 * 60 * 24}, //1 day
             secret: app.get('sessionSecret'),
-            store: new MongoStore({
-                db: app.get('sessionDbName')
-            })
+            store: store
         }));
         return this;
     };
@@ -172,6 +178,15 @@ var AppBoot = function() {
         var passportLocal = require('./config/security/local')(app);
         app.use(passportLocal.initialize());
         app.use(passportLocal.session());
+    };
+    this.initViews = function()
+    {
+        bootLog('Init views');
+        var path = require('path');
+        app.use(express.static(path.join(__dirname, 'public')));
+        app.set('views', path.join(__dirname, 'views'));
+        app.set('view engine', 'jade');
+        return this;
     };
     return app;
 };

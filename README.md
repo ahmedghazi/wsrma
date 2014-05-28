@@ -1,3 +1,75 @@
 Express Rapido
 =========
-Hello world app with Node js + Express + Mongooze + Jade
+
+Express rapido is a little bootstrap to start nodejs applications in MVC.
+It uses a number of open source projects to work properly:
+
+* [node.js]
+* [Express] - fast node.js network app framework [@tjholowaychuk]
+* [Mongoose] - mongodb database mapping
+* [jade] - node js templating
+
+Learn more in the package.json present in this repository.
+
+Installation
+--------------
+
+```sh
+git clone git@github.com/Soixanteseize/express-rapido myApp
+cd myApp
+npm install
+```
+
+Start
+--------------
+```sh
+npm start
+```
+OR
+```sh
+node ./bin/www
+```
+
+Debuging
+--------------
+when you start app, you can define DEBUG level
+```sh
+DEBUG="boot,app" npm start
+```
+
+Coding
+--------------
+This tool is a simple layer that pre-configure an Express instance.
+Since Express 4 was released, you must load some middleware using npm or using your own one. (like express-session)
+Everything is done in the **app.js** and **boot.js** file.
+
+
+### Adding controllers ###
+To add controllers, you have to register them in the **boot.js** file.
+```javascript
+app.registerController('home');
+```
+Then you must attach a route to the controllers
+```javascript
+app.registerRouteConfig('/myhomeurl', app.getController('home')(app).router);
+```
+*To work with Express router, your controllers must return an express router instance. ```app.getController('home')(app).router```
+Each route declared inside this controller will be prefixed with the route path **"/myroute"** *
+
+### Adding models ###
+To add models, you have to register them in the **boot.js** file.
+```javascript
+app.registerModel('Option', 'option');
+```
+
+Warnings
+--------------
+This app use **mongoose (mongodb)** as storage engine. **Session storage** is configured to work with it.
+If you disable or do not use mongodb, do not forget to reconfigure your session storage (like InMemory storage).
+
+[git-repo-url]: git@github.com/Soixanteseize/express-rapido
+[node.js]:http://nodejs.org
+[jQuery]:http://jquery.com
+[Mongoose]:http://mongoosejs.com/
+[express]:http://expressjs.com
+[jade]:http://jade-lang.com/

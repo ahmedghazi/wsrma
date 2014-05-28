@@ -17,6 +17,4 @@ app.registerRouteConfig('/', app.getController('home')(app).router);
 app.registerRouteConfig('', app.getController('error404')(app).router);
 app.registerRouteConfig('', app.getController('error'));
 
-app.initRouteconfig();
-
 module.exports = app;
