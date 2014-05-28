@@ -67,7 +67,7 @@ app.registerModel('Option', 'option');
 Warnings
 --------------
 This app use **mongoose (mongodb)** as storage engine. **Session storage** is configured to work with it.
-If you disable or do not use mongodb, do not forget to reconfigure your session storage (like InMemory storage).
+If you disable or do not use mongodb, the session storage will be instance of MemoryStore.
 
 [node.js]:http://nodejs.org
 [jQuery]:http://jquery.com

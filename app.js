@@ -129,7 +129,7 @@ var AppBoot = function() {
         this.initDb();
         var mongoose = require('mongoose');
         var me = this;
-        mongoose.connection.on('open', function(){
+        mongoose.connection.on('open', function() {
             app.mongoose = mongoose;
             me.initSession();
             me.initSecurity();
@@ -143,12 +143,17 @@ var AppBoot = function() {
 
     this.initDb = function()
     {
+        var me = this;
         var mongoose = require('mongoose');
         var mongoUrl = 'mongodb://localhost/' + app.get('appDbName');
         bootLog('Init Database connection to :', mongoUrl);
         mongoose.connect(mongoUrl, function(err) {
             if (err) {
                 bootLog('Can\'t connect to %s database', mongoUrl);
+                bootLog('Init Route config Now, because mongodb callback will not be called', mongoUrl);
+                me.initSession();
+                me.initSecurity();
+                app.initRouteconfig();
                 return;
             }
         });
@@ -165,11 +170,13 @@ var AppBoot = function() {
                 db: app.mongoose.connection.db//app.get('sessionDbName')
             });
         }
+
         app.use(session({
             cookie: {maxAge: 60000 * 60 * 24}, //1 day
             secret: app.get('sessionSecret'),
             store: store
         }));
+
         return this;
     };
     this.initSecurity = function()
