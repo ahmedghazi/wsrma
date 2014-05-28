@@ -15,7 +15,7 @@ Installation
 --------------
 
 ```sh
-git clone git@github.com/Soixanteseize/express-rapido myApp
+git clone git@github.com/Soixanteseize/express-rapido.git myApp
 cd myApp
 npm install
 ```
