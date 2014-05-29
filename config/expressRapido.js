@@ -14,6 +14,8 @@ var ExpressRadido = function() {
      */
     var me = this;
     app.boot = function() {
+        //extend the app with rapido tools MVC
+        me.extendApp();
         me.init();
         return app;
     };
@@ -27,9 +29,6 @@ var ExpressRadido = function() {
         bootLog('Init');
         var mongoose = require('mongoose');
         var me = this;
-
-        //extend the app with rapido tools MVC
-        this.extendApp();
 
         //init some middleware, maybe should be extended
         app.initAppSettings();
