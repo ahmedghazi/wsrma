@@ -1,7 +1,12 @@
 extends layout
 
 block content
-    div.wrap
-        h1 #{message} #{error.status}
-        if error.message
-            pre #{error.stack}
+    div.container
+        div.page-header
+            h1 Error #{error.status}
+        div.panel.panel-danger
+            div.panel-heading
+                h2.panel-title #{message} 
+            if error.message
+                div.panel-body
+                    pre #{error.stack}

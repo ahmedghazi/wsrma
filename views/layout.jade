@@ -1,23 +1,16 @@
 doctype html
-html(ng-app="app")
+html(ng-app="app" ng-controller="appCtrl")
     head
         base(href="/")
         title=title
         block links
-            ////link(rel='stylesheet', href='/css/app.css')
-            ////link(rel='stylesheet', href='/css/jquery/jquery-ui-1.10.4.custom.min.css')
+            link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
         
-        block fb-meta
-            if(getLocale() === 'en')
-                meta(property="og:locale", content="en_US")
-                meta(property="og:locale:alternate", content="fr_FR")
-            else
-                meta(property="og:locale", content="fr_FR")
-                meta(property="og:locale:alternate", content="en_US")
     body(class=getLocale())
         block content
         
         script(src='/javascripts/jquery.min.js')        
+        script(src='//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js')        
         script(src='/javascripts/angular/angular.min.js')        
         script(src='/javascripts/angular-file-upload/angular-file-upload.min.js')        
         script(src='/javascripts/angular/angular-route.min.js')        
