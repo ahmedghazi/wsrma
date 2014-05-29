@@ -55,9 +55,6 @@ Then you must attach a route to the controllers
 ```javascript
 app.registerRouteConfig('/myhomeurl', app.getController('home')(app).router);
 ```
-*To work with Express router, your controllers must return an express router instance. ```app.getController('home')(app).router```
-Each route declared inside this controller will be prefixed with the route path **"/myroute"** *
-See the defaults controllers that are already defined in the /controllers folder.
 
 ### Adding models ###
 To add models, you have to register them in the **boot.js** file.
