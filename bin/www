@@ -1,16 +1,7 @@
 #!/usr/bin/env node
 var debug = require('debug')('app');
-var app = require('../boot');
-var fs = require('fs');
-//var https = require('http');
-
-
-/*app.listen = function() {
-    //var server = http.createServer(app);
-    var server = https.createServer(options, app);
-    return server.listen.apply(server, arguments);
-};*/
-
+var app = require('../app');
+var http = require('http');
 var server = app.listen(app.get('port'), function() {
     debug('Express server listening on port ' + server.address().port);
 });
