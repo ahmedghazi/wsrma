@@ -43,11 +43,11 @@ Coding
 --------------
 This tool is a simple layer that pre-configure an Express instance.
 Since Express 4 was released, you must load some middleware using npm or using your own one. (like express-session)
-Everything is done in the **app.js** and **boot.js** file.
+Everything is done in the **app.js** and **/config/expressRapido.js** file.
 
 
 ### Adding controllers ###
-To add controllers, you have to register them in the **boot.js** file.
+To add controllers, you have to register them in the **/config/expressRapido.js** file.
 ```javascript
 app.registerController('home');
 ```
@@ -57,7 +57,7 @@ app.registerRouteConfig('/myhomeurl', app.getController('home')(app).router);
 ```
 
 ### Adding models ###
-To add models, you have to register them in the **boot.js** file.
+To add models, you have to register them in the **/config/expressRapido.js** file.
 ```javascript
 app.registerModel('Option', 'option');
 ```
