@@ -9,6 +9,8 @@ var SecurityController = function(app) {
      */
     router.post('/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
+            req.flash('email', req.body.email);
+
             if (err) {
                 req.flash('errors', err);
                 return res.redirect('/security/login');
@@ -34,9 +36,11 @@ var SecurityController = function(app) {
      */
     router.get('/login', function(req, res) {
         var errors = req.flash('errors');
-        return res.render('login', {
+        var email = req.flash('email');
+        return res.render('security/login', {
             title: 'Login',
-            errors: errors
+            errors: errors,
+            email: email
         });
     });
 
