@@ -1,18 +1,16 @@
 var Error404Controller = function(app) {
     var express = require('express');
     var passport = require('passport');
-    var router = express.Router();
+    this.router = express.Router();
 
     //404 handler
-    router.use(function(req, res, next) {
+    this.router.use(function(req, res, next) {
         var err = new Error("Page not Found");
         err.status = 404;
         next(err);
     });
 
-    return {
-        router: router
-    };
+    return this;
 };
 
 module.exports = Error404Controller;

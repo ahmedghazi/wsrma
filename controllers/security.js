@@ -1,13 +1,13 @@
 var SecurityController = function(app) {
     var express = require('express');
     var passport = require('passport');
-    var router = express.Router();
+    this.router = express.Router();
 
     /*
      * Login Check Path
      * reutrn the login form as view
      */
-    router.post('/login', function(req, res, next) {
+    this.router.post('/login', function(req, res, next) {
         passport.authenticate('local', function(err, user, info) {
             req.flash('email', req.body.email);
 
@@ -34,7 +34,7 @@ var SecurityController = function(app) {
      * Login Path
      * reutrn the login form as view
      */
-    router.get('/login', function(req, res) {
+    this.router.get('/login', function(req, res) {
         var errors = req.flash('errors');
         var email = req.flash('email');
         return res.render('security/login', {
@@ -47,14 +47,12 @@ var SecurityController = function(app) {
     /*
      * Logout Path
      */
-    router.get('/logout', function(req, res) {
+    this.router.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/security/login');
     });
 
-    return {
-        router: router
-    };
+    return this;
 };
 
 module.exports = SecurityController;
