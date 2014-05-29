@@ -8,6 +8,10 @@ var ExpressRadido = function() {
     var express = require('express');
     var app = express();
 
+    this.use = function(key, usage){
+        app.use(key, usage);
+    };
+
     /**
      * Boot the app
      * @returns {Express Object}
@@ -91,7 +95,7 @@ var ExpressRadido = function() {
             });
         }
 
-        app.use(session({
+        this.use(session({
             cookie: {maxAge: 60000 * 60 * 24}, //1 day
             secret: app.get('sessionSecret'),
             store: store
@@ -108,8 +112,8 @@ var ExpressRadido = function() {
     {
         bootLog('Init Security');
         var passportLocal = require('./security/local')(app);
-        app.use(passportLocal.initialize());
-        app.use(passportLocal.session());
+        this.use(passportLocal.initialize());
+        this.use(passportLocal.session());
     };
 
     /**
@@ -120,7 +124,7 @@ var ExpressRadido = function() {
     {
         bootLog('Init views');
         var path = require('path');
-        app.use(express.static(path.join(path.dirname(__dirname), 'public')));
+        this.use(express.static(path.join(path.dirname(__dirname), 'public')));
         app.set('views', path.join(path.dirname(__dirname), 'views'));
         app.set('view engine', 'jade');
         return this;
@@ -140,7 +144,7 @@ var ExpressRadido = function() {
             directory: __dirname + '/locales',
             updateFiles: false
         });
-        app.use(i18n.init);
+        this.use(i18n.init);
     };
 
     /**
@@ -182,13 +186,13 @@ var ExpressRadido = function() {
             var flash = require('connect-flash');
             var limits = require('limits');
 
-            app.use(favicon());
-            app.use(logger('dev'));
-            app.use(bodyParser.json());
-            app.use(bodyParser.urlencoded());
-            app.use(cookieParser());
-            app.use(flash());
-            app.use(limits('2Mo'));
+            this.use(favicon());
+            this.use(logger('dev'));
+            this.use(bodyParser.json());
+            this.use(bodyParser.urlencoded());
+            this.use(cookieParser());
+            this.use(flash());
+            this.use(limits('2Mo'));
             app.enable('trust proxy');
 
             var sessionSecret = process.env.npm_package_config_session_secret_key || 'session_secret_key';
@@ -286,7 +290,7 @@ var ExpressRadido = function() {
             for (var key in app.routesConfig) {
                 var route = app.getRouteConfig(key);
                 bootLog('Listen for Route : %s', route.path);
-                app.use(route.path, route.controller);
+                this.use(route.path, route.controller);
             }
             return app;
         };
