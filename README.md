@@ -47,7 +47,7 @@ Everything is done in the **app.js** and **/config/expressRapido.js** file.
 
 
 ### Adding controllers ###
-To add controllers, you have to register them in the **/config/expressRapido.js** file.
+To add controllers, you have to register them in the **/app.js** file.
 ```javascript
 app.registerController('home');
 ```
@@ -57,7 +57,7 @@ app.registerRouteConfig('/myhomeurl', app.getController('home')(app).router);
 ```
 
 ### Adding models ###
-To add models, you have to register them in the **/config/expressRapido.js** file.
+To add models, you have to register them in the **/app.js** file.
 ```javascript
 app.registerModel('Option', 'option');
 ```

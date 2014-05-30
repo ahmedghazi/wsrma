@@ -1,12 +1,12 @@
 extends layout
 
 block content
-    div.container
-        div.page-header
+    .container
+        .page-header
             h1 Error #{error.status}
-        div.panel.panel-danger
-            div.panel-heading
+        .panel.panel-danger
+            .panel-heading
                 h2.panel-title #{message} 
             if error.message
-                div.panel-body
+                .panel-body
                     pre #{error.stack}

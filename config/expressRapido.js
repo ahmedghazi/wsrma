@@ -8,7 +8,7 @@ var ExpressRadido = function() {
     var express = require('express');
     var app = express();
 
-    this.use = function(key, usage){
+    this.use = function(key, usage) {
         app.use(key, usage);
     };
 
@@ -124,9 +124,17 @@ var ExpressRadido = function() {
     {
         bootLog('Init views');
         var path = require('path');
+
+        //support Twig and jade templating
+        if (app.get('view engine') === 'twig') {
+            app.set('views', path.join(path.dirname(__dirname), 'views/twig'));
+        } else {
+            app.set('views', path.join(path.dirname(__dirname), 'views/jade'));
+        }
+        
+        //declare dir public as static content.
         this.use(express.static(path.join(path.dirname(__dirname), 'public')));
-        app.set('views', path.join(path.dirname(__dirname), 'views'));
-        app.set('view engine', 'jade');
+
         return this;
     };
 
@@ -206,6 +214,8 @@ var ExpressRadido = function() {
 
             var host = process.env.npm_package_config_host || null;
             app.set('host', host);
+            
+            app.set('view engine', 'jade');
         };
 
         /**

@@ -1,6 +1,5 @@
 var Error404Controller = function(app) {
     var express = require('express');
-    var passport = require('passport');
     this.router = express.Router();
 
     //404 handler
