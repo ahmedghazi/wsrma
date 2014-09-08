@@ -11,7 +11,7 @@ app.boot();
 //register some models
 app.registerModel('User', 'user');
 app.registerModel('Option', 'option');
-app.registerModel('Ass', 'Ass');
+app.registerModel('Ass', 'ass');
 
 //register some controllers
 app.registerController('request');
@@ -28,6 +28,8 @@ app.registerRouteConfig('/', app.getController('home')(app).router);
 app.registerRouteConfig('/api', app.getController('api')(app).router);
 app.registerRouteConfig('', app.getController('error404')(app).router);
 app.registerRouteConfig('', app.getController('error'));
+
+
 
 
 module.exports = app;

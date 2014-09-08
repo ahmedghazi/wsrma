@@ -134,7 +134,7 @@ var ExpressRadido = function() {
         
         //declare dir public as static content.
         this.use(express.static(path.join(path.dirname(__dirname), 'public')));
-
+        
         return this;
     };
 
@@ -196,6 +196,7 @@ var ExpressRadido = function() {
 
             this.use(favicon());
             this.use(logger('dev'));
+            this.use(bodyParser());
             this.use(bodyParser.json());
             this.use(bodyParser.urlencoded());
             this.use(cookieParser());
