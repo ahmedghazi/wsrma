@@ -1,11 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "application-name",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www"
-=======
   "name": "express-rapido",
   "version": "0.0.1",
   "private": true,
@@ -20,7 +13,6 @@
       "secret_key": "secretRadpido2014"
     },
     "app_db_name": "application"
->>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -29,11 +21,6 @@
     "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
-<<<<<<< HEAD
-    "jade": "~1.3.0"
-  }
-}
-=======
     "jade": "~1.3.0",
     "twig": "~0.7.1",
     "connect-mongo": "~0.4.0",
@@ -57,4 +44,4 @@
     "http-auth": "~2.1.7"
   }
 }
->>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
+
