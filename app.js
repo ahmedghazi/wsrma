@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -54,6 +55,40 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+=======
+
+/**
+ * This is an Express app instance, extended by express rapido
+ * @type ExpressRapido
+ */
+var app = require('./config/expressRapido.js')();
+
+//boot the app
+app.boot();
+
+//register some models
+app.registerModel('User', 'user');
+app.registerModel('Option', 'option');
+app.registerModel('Ass', 'ass');
+
+//register some controllers
+app.registerController('request');
+app.registerController('security');
+app.registerController('home');
+app.registerController('error404');
+app.registerController('error');
+app.registerController('api');
+
+//register some route
+app.registerRouteConfig('*', app.getController('request'));
+app.registerRouteConfig('/security', app.getController('security')(app).router);
+app.registerRouteConfig('/', app.getController('home')(app).router);
+app.registerRouteConfig('/api', app.getController('api')(app).router);
+app.registerRouteConfig('', app.getController('error404')(app).router);
+app.registerRouteConfig('', app.getController('error'));
+
+
+>>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
 
 
 module.exports = app;

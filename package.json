@@ -1,9 +1,26 @@
 {
+<<<<<<< HEAD
   "name": "application-name",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
+=======
+  "name": "express-rapido",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "startProd": "forever start ./bin/www"
+  },
+  "config": {
+    "host": "http://localhost",
+    "port": 3001,
+    "session": {
+      "secret_key": "secretRadpido2014"
+    },
+    "app_db_name": "application"
+>>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -12,6 +29,32 @@
     "cookie-parser": "~1.0.1",
     "body-parser": "~1.0.0",
     "debug": "~0.7.4",
+<<<<<<< HEAD
     "jade": "~1.3.0"
   }
 }
+=======
+    "jade": "~1.3.0",
+    "twig": "~0.7.1",
+    "connect-mongo": "~0.4.0",
+    "express-session": "~1.0.2",
+    "passport": "~0.2.0",
+    "passport-local": "~1.0.0",
+    "mongoose": "3.8.5",
+    "connect-flash": "~0.1.1",
+    "colors": "~0.6.2",
+    "forms-mongoose": "0.0.6",
+    "forms": "~0.7.0",
+    "i18n": "~0.4.1",
+    "instagram-node-lib": "~0.1.1",
+    "minimist": "0.0.8",
+    "formidable": "~1.0.14",
+    "imagemagick": "~0.1.3",
+    "fb": "~0.7.0",
+    "csurf": "~1.1.0",
+    "limits": "0.0.3",
+    "request": "~2.34.0",
+    "http-auth": "~2.1.7"
+  }
+}
+>>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
