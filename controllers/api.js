@@ -67,6 +67,7 @@ var ApiController = function(app) {
     
     // UPLOAD ASS
     this.router.post('/upload', filesParser, function(req, res){
+        console.log(req.uploadFiles.image);
         fs.readFile(req.uploadFiles.image.path, function (err, data) {
             var imageName = req.uploadFiles.image.name
 
