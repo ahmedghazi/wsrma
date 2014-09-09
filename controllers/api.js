@@ -57,6 +57,7 @@ var ApiController = function(app) {
     var filesParser = function(req, res, next) {
         var formF = new formidable.IncomingForm({ uploadDir: path.dirname(__dirname) + '/tmp' });
         formF.parse(req, function(err, fields, files) {
+            //console.log(files);
             req.uploadFiles = files;
             //req.body = {};
             

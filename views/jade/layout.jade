@@ -1,12 +1,12 @@
 doctype html
-html(ng-app="app" ng-controller="appCtrl")
+html
     head
         base(href="/")
         title=title
         block links
-            link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css')
+
         
-    body(class=getLocale())
+    body
         block content
         
         script(src='/javascripts/jquery.min.js')        
