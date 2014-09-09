@@ -13,7 +13,7 @@ var HomeController = function(app) {
 
         //render the index.html.jade
         return res.render('index', {
-            title: 'Default',
+            title: 'WSRMA',
             count: count
         });
     });
