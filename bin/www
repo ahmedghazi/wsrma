@@ -1,17 +1,7 @@
 #!/usr/bin/env node
-<<<<<<< HEAD
-var debug = require('debug')('my-application');
-var app = require('../app');
-
-app.set('port', process.env.PORT || 3000);
-
-var server = app.listen(app.get('port'), function() {
-  debug('Express server listening on port ' + server.address().port);
-=======
 var debug = require('debug')('app');
 var app = require('../app');
 var http = require('http');
 var server = app.listen(app.get('port'), function() {
     debug('Express server listening on port ' + server.address().port);
->>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
 });

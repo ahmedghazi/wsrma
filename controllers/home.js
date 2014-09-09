@@ -4,7 +4,7 @@ var HomeController = function(app) {
 
     //Listen for route /
     this.router.get('/', function(req, res) {
-
+        
         //session storage exemple
         var session = req.session;
         var count = session.count || 0;
@@ -13,7 +13,7 @@ var HomeController = function(app) {
 
         //render the index.html.jade
         return res.render('index', {
-            title: 'Default',
+            title: 'WSRMA',
             count: count
         });
     });
