@@ -9,6 +9,7 @@ var ApiController = function(app) {
 
     // GET LAST ASSES
     this.router.get('/', function(req, res){
+        console.log("api")
         return Ass
                 .find()
                 .sort({date_created: 'desc'})

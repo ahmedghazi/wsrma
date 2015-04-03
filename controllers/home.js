@@ -4,7 +4,7 @@ var HomeController = function(app) {
 
     //Listen for route /
     this.router.get('/', function(req, res) {
-
+        console.log("home")
         //session storage exemple
         var session = req.session;
         var count = session.count || 0;

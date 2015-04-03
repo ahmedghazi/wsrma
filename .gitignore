@@ -1,13 +1,5 @@
-<<<<<<< HEAD
-nbproject/
 node_modules/
 data/
 *.log
 tmp/
 uploads/
-=======
-nbproject
-node_modules
-data
-*.log
->>>>>>> c0f633ae3b1d829573057bf4d626742dc3f2b3a4
