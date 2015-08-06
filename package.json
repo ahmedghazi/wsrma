@@ -12,7 +12,7 @@
     "session": {
       "secret_key": "secretRadpido2014"
     },
-    "app_db_name": "application"
+    "app_db_name": "wsrma"
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -35,7 +35,7 @@
     "i18n": "~0.4.1",
     "instagram-node-lib": "~0.1.1",
     "minimist": "0.0.8",
-    "formidable": "~1.0.14",
+    "formidable": "~1.0.17",
     "imagemagick": "~0.1.3",
     "fb": "~0.7.0",
     "csurf": "~1.1.0",
@@ -43,9 +43,9 @@
     "request": "~2.34.0",
     "http-auth": "~2.1.7"
   },
-"engines": {
-  "node": "0.8.x",
-  "npm": "1.2.x"
-}
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.2.x"
+  }
 }
 

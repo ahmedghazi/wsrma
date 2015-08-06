@@ -29,5 +29,6 @@ app.registerRouteConfig('/api', app.getController('api')(app).router);
 app.registerRouteConfig('', app.getController('error404')(app).router);
 app.registerRouteConfig('', app.getController('error'));
 
+//console.log(app)
 
 module.exports = app;

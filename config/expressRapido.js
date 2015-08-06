@@ -6,6 +6,7 @@ var ExpressRadido = function() {
 
     var log = require('debug')('app');
     var express = require('express');
+
     var app = express();
 
     this.use = function(key, usage) {
@@ -197,8 +198,10 @@ var ExpressRadido = function() {
             this.use(favicon());
             this.use(logger('dev'));
             //this.use(bodyParser());
-            this.use(bodyParser.json());
+            
             this.use(bodyParser.urlencoded( { extended: false } ));
+            this.use(bodyParser.json());
+            
             this.use(cookieParser());
             this.use(flash());
             this.use(limits('2Mo'));

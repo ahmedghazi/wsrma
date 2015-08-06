@@ -3,6 +3,8 @@ var ApiController = function(app) {
     this.router = express.Router();
     var fs = require('fs');
     var formidable = require('formidable');
+    //var multer = require('multer');
+    //var upload = multer();
     var path = require('path');
     var Ass = app.getModel('Ass');
     var postsPerPage = 2;
@@ -54,106 +56,82 @@ var ApiController = function(app) {
         });
     });
 
-    // MIDDLEWARE IMAGE PARSER
-    var filesParser = function(req, res, next) {
+    this.router.get('/c', function(req, res){
+        return res.render('c', {
+            title: "UPLOAD"
+        });
+    });
+
+    this.router.post('/c', function(req, res){
         var formF = new formidable.IncomingForm({ uploadDir: path.dirname(__dirname) + '/tmp' });
         formF.parse(req, function(err, fields, files) {
-            //console.log(files);
             req.uploadFiles = files;
-            //req.body = {};
-            
-            return next();
-        });
-    };
-
-    
-    // UPLOAD ASS
-    this.router.post('/upload', filesParser, function(req, res){
-        //return res.json(req.uploadFiles);
-        fs.readFile(req.uploadFiles.image.path, function (err, data) {
-            var imageName = req.uploadFiles.image.name
-
-            /// If there's an error
-            if(!imageName){
-                console.log("There was an error")
-                res.redirect("/");
-                res.end();
-
-            } else {                
-                var newPath = path.dirname(__dirname) + "/uploads/" + imageName;
-                 /// write file to uploads/fullsize folder
-                fs.writeFile(newPath, data, function (err) {
-                    console.log("imageName : "+imageName);
-                    return res.json(imageName);
-                });
-            }
+            req.fields = fields;
         });
 
-    });
-    
+        formF.on('progress', function(bytesReceived, bytesExpected) {
+            var percent_complete = (bytesReceived / bytesExpected) * 100;
+            console.log(percent_complete.toFixed(2));
+        });
 
+        formF.on('end', function (fields, files) {
+            //console.log(req.fields)
+            //console.log(req.uploadFiles)
 
-    // CREATE ASS
-    this.router.post('/c', filesParser, function(req, res){
+            fs.readFile(req.uploadFiles.image.path, function (err, data) {
+                var imageName = req.uploadFiles.image.name;
 
-        fs.readFile(req.uploadFiles.image.path, function (err, data) {
-            var imageName = req.uploadFiles.image.name
+                /// If there's an error
+                if(!imageName){
+                    console.log("There was an error");
+                    res.redirect("/");
+                    res.end();
 
-            /// If there's an error
-            if(!imageName){
-                console.log("There was an error")
-                res.redirect("/");
-                res.end();
+                } else {
+                    var newPath = path.dirname(__dirname) + "/uploads/" + imageName;
+                     /// write file to uploads/fullsize folder
+                    fs.writeFile(newPath, data, function (err) {
+                        console.log("imageName : "+imageName);
 
-            } else {                
-                var newPath = path.dirname(__dirname) + "/uploads/" + imageName;
-                 /// write file to uploads/fullsize folder
-                fs.writeFile(newPath, data, function (err) {
-                    console.log("imageName : "+imageName);
+                        var ass = new Ass({
+                            img: imageName,
+                            ratings:[req.fields.rate],
+                            average: 5
+                        });
 
-                    var ass = new Ass({
-                        img: imageName,
-                        ratings:req.body.rate
+                        ass.save(function (err) {
+                            if (!err) {
+                                return console.log("ass created");
+                            } else {
+                                return console.log(err);
+                            }
+                        });
+
+                        return res.json(ass);
                     });
+                }
+            });
 
-                    console.log(req.files);
-
-                    ass.save(function (err) {
-                        if (!err) {
-                            return console.log("ass created");
-                        } else {
-                            return console.log(err);
-                        }
-                    });
-
-                    return res.json(ass);
-                });
-            }
-        });
-        
-    });
-
-    // GET ASS
-    this.router.get('/a/:id', function(req, res){
-        return Ass.findById(req.params.id, function (err, ass) {
-            if (err) {
-                return next(err);
-            }
-
-            res.json(ass);
         });
     });
 
     // UPDATE ASS
-    this.router.post('/u', function(req, res, next){
-        //console.log("params : ",req.body);
-        return Ass.findById(req.body.id, function (err, ass) {
+    this.router.post('/u/:id', function(req, res, next){
+        return Ass.findById(req.params.id, function (err, ass) {
             if (err) {
                 return next(err);
             }
+            
             ass.ratings.push(req.body.rate);
-            ass.average = 5;
-           
+
+            var rates = 0;
+            for(var i=0; i<ass.ratings.length; i++){
+                rates += parseInt(ass.ratings[i]);
+            }
+            
+            var average = rates / ass.ratings.length;
+            ass.average = Math.round(average);
+
             ass.save(function (err) {
                 if (!err) {
                     return console.log("updated");
