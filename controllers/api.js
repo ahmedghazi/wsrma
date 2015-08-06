@@ -3,11 +3,9 @@ var ApiController = function(app) {
     this.router = express.Router();
     var fs = require('fs');
     var formidable = require('formidable');
-    //var multer = require('multer');
-    //var upload = multer();
     var path = require('path');
     var Ass = app.getModel('Ass');
-    var postsPerPage = 2;
+    var postsPerPage = 10;
 
     // GET LAST ASSES
     this.router.get('/', function(req, res){
@@ -27,7 +25,7 @@ var ApiController = function(app) {
     });
 
     // PAGINATION
-    this.router.get('/', function(req, res){
+    this.router.get('/:page', function(req, res){
         return Ass
                 .find()
                 .sort({date_created: 'desc'})
@@ -43,12 +41,6 @@ var ApiController = function(app) {
         });
     });
 
-
-
-
-    /***
-
-    ***/
     // GET FORM UPLOAD
     this.router.get('/upload', function(req, res){
         return res.render('upload', {
@@ -75,9 +67,6 @@ var ApiController = function(app) {
         });
 
         formF.on('end', function (fields, files) {
-            //console.log(req.fields)
-            //console.log(req.uploadFiles)
-
             fs.readFile(req.uploadFiles.image.path, function (err, data) {
                 var imageName = req.uploadFiles.image.name;
 
@@ -111,7 +100,6 @@ var ApiController = function(app) {
                     });
                 }
             });
-
         });
     });
 
