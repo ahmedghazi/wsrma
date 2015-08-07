@@ -49,13 +49,13 @@ var ApiController = function(app) {
         });
     });
 
-    this.router.get('/c', function(req, res){
+    this.router.get('/create', function(req, res){
         return res.render('c', {
             title: "UPLOAD"
         });
     });
 
-    this.router.post('/c', function(req, res){
+    this.router.post('/create', function(req, res){
         console.log("form create")
         var formF = new formidable.IncomingForm({ uploadDir: path.dirname(__dirname) + '/tmp' });
         formF.parse(req, function(err, fields, files) {
