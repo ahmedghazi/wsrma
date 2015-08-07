@@ -48,6 +48,7 @@ var ApiController = function(app) {
             title: "UPLOAD"
         });
     });
+    
 
     this.router.get('/create', function(req, res){
         return res.render('c', {
