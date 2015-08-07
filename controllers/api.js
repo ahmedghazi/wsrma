@@ -25,7 +25,7 @@ var ApiController = function(app) {
     });
 
     // PAGINATION
-    this.router.get('/:page', function(req, res){
+    this.router.get('page/:page', function(req, res){
         return Ass
                 .find()
                 .sort({date_created: 'desc'})
@@ -40,6 +40,7 @@ var ApiController = function(app) {
             return res.json(asses);
         });
     });
+    
 
     // GET FORM UPLOAD
     this.router.get('/upload', function(req, res){
