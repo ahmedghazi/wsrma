@@ -87,12 +87,18 @@ var ExpressRadido = function() {
     this.initSession = function()
     {
         bootLog('Init Session');
-        var session = require('./security/session')();
+        //var session = require('./security/session')();
+        var session = require('express-session');
         var MongoStore = require('connect-mongo')(session);
+        var mongoUrl = 'mongodb://localhost/' + app.get('appDbName');
+
         var store = null;
+        //console.log(app.mongoose.connection.db)
         if (app.mongoose) {
             store = new MongoStore({
-                db: app.mongoose.connection.db
+                //db: app.mongoose.connection.db
+                //db: new MongoStore({ mongooseConnection: app.mongoose.connection })
+                url: mongoUrl,
             });
         }
 
