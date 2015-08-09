@@ -13,7 +13,7 @@ var ApiController = function(app) {
         return Ass
                 .find()
                 .sort({date_created: 'desc'})
-                .limit(postsPerPage)
+                //.limit(postsPerPage)
                 .exec(function(err, asses) {
             if (err) {
                 console.log(err);
