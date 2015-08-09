@@ -89,20 +89,20 @@ var ApiController = function(app) {
 
                         var ass = new Ass({
                             img: imageName,
-                            //ratings:[req.fields.rate],
+                            ratings:[req.fields.rate],
                             average: 5
                         });
 console.log(ass)
                         ass.save(function (err) {
                             if (!err) {
-                                console.log("ass created");
-                                return res.json(ass);
+                                return console.log("ass created");
+                                //return res.json(ass);
                             } else {
                                 return console.log(err);
                             }
                         });
 
-                        //return res.json(ass);
+                        return res.json(ass);
                     });
                 }
             });

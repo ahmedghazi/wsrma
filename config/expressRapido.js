@@ -105,8 +105,10 @@ var ExpressRadido = function() {
         this.use(session({
             cookie: {maxAge: 60000 * 60 * 24}, //1 day
             secret: app.get('sessionSecret'),
-            store: store
-        }));
+            //store: store
+            store: new MongoStore({ 
+                mongoose_connection: app.mongoose.connections[0] })
+            }));
 
         return this;
     };
