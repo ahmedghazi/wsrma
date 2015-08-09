@@ -70,6 +70,7 @@ var ApiController = function(app) {
         });
 
         formF.on('end', function (fields, files) {
+            console.log("form end")
             fs.readFile(req.uploadFiles.image.path, function (err, data) {
                 var imageName = req.uploadFiles.image.name;
 
@@ -83,7 +84,7 @@ var ApiController = function(app) {
                     var newPath = path.dirname(__dirname) + "/uploads/" + imageName;
                      /// write file to uploads/fullsize folder
                     fs.writeFile(newPath, data, function (err) {
-                        //console.log("imageName : "+imageName);
+                        console.log("writeFile end, imageName : "+imageName);
 
                         var ass = new Ass({
                             img: imageName,
