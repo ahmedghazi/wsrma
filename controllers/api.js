@@ -112,7 +112,7 @@ var ApiController = function(app) {
             if (err) {
                 return next(err);
             }
-            
+            console.log(ass)
             ass.ratings.push(req.body.rate);
 
             var rates = 0;
