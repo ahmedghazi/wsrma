@@ -83,11 +83,11 @@ var ApiController = function(app) {
                     var newPath = path.dirname(__dirname) + "/uploads/" + imageName;
                      /// write file to uploads/fullsize folder
                     fs.writeFile(newPath, data, function (err) {
-                        console.log("imageName : "+imageName);
+                        //console.log("imageName : "+imageName);
 
                         var ass = new Ass({
                             img: imageName,
-                            ratings:[req.fields.rate],
+                            //ratings:[req.fields.rate],
                             average: 5
                         });
 
