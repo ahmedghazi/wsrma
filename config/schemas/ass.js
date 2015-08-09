@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var Ass = mongoose.Schema({
+	index: true,
     date_created: {type: Date, default: Date.now},
     img: {unique: true, type: String},
     ratings: {type: Array},
