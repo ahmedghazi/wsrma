@@ -58,6 +58,7 @@ var ApiController = function(app) {
 
     this.router.post('/c', function(req, res){
         console.log("form create")
+        console.log(Ass)
         var formF = new formidable.IncomingForm({ uploadDir: path.dirname(__dirname) + '/tmp' });
         formF.parse(req, function(err, fields, files) {
             req.uploadFiles = files;
