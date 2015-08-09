@@ -66,6 +66,9 @@ var ExpressRadido = function() {
         var mongoose = require('mongoose');
         var mongoUrl = 'mongodb://localhost/' + app.get('appDbName');
         bootLog('Init Database connection to :', mongoUrl);
+        var db = mongoose.connection;
+        db.on('error', console.error.bind(console, 'connection error:'));
+
         mongoose.connect(mongoUrl, function(err) {
             if (err) {
                 bootLog('Can\'t connect to %s database', mongoUrl);
