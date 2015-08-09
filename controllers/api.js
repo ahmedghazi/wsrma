@@ -58,7 +58,7 @@ var ApiController = function(app) {
 
     this.router.post('/c', function(req, res){
         console.log("form create")
-        console.log(Ass)
+        //console.log(Ass)
         var formF = new formidable.IncomingForm({ uploadDir: path.dirname(__dirname) + '/tmp' });
         formF.parse(req, function(err, fields, files) {
             req.uploadFiles = files;
@@ -92,16 +92,17 @@ var ApiController = function(app) {
                             //ratings:[req.fields.rate],
                             average: 5
                         });
-
+console.log(ass)
                         ass.save(function (err) {
                             if (!err) {
-                                return console.log("ass created");
+                                console.log("ass created");
+                                return res.json(ass);
                             } else {
                                 return console.log(err);
                             }
                         });
 
-                        return res.json(ass);
+                        //return res.json(ass);
                     });
                 }
             });
